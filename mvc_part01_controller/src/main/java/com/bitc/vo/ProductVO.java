@@ -3,7 +3,7 @@ package com.bitc.vo;
 public class ProductVO {
 	private String name;
 	private int price;
-	
+
 	public ProductVO() {
 		System.out.println("기본 생성자");
 	}
@@ -34,5 +34,5 @@ public class ProductVO {
 	public void setPrice(int price) {
 		this.price = price;
 	}
-	
+
 }

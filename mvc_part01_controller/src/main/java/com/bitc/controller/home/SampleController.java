@@ -21,47 +21,42 @@ public class SampleController {
 	public void doA() {
 		System.out.println("doA 호출");
 	}
-	
+
 	@RequestMapping("doB")
 	public String doB() {
 		System.out.println("doB 호출");
 		return "home";
 	}
-	
+
 	@RequestMapping("doC")
 	public String doC(HttpServletRequest request) {
 		System.out.println("doC 호출");
 		request.setAttribute("modelTest", "doC test");
 		return "home";
 	}
-	
-	@RequestMapping(value="doD", method = RequestMethod.GET)
-	public String doD(
-		@RequestParam(name="msg", required = true) String message, Model model	
-		) {
-		System.out.println("doD 호출 - "+message);
+
+	@RequestMapping(value = "doD", method = RequestMethod.GET)
+	public String doD(@RequestParam(name = "msg", required = true) String message, Model model) {
+		System.out.println("doD 호출 - " + message);
 		model.addAttribute("msg", message);
 		return "result";
 	}
-	@RequestMapping(value="doE")
-	public String doE(
-				@RequestParam(name="msg", required = false, defaultValue="empty message") String message,
-				Model model
-			) {
-		model.addAttribute("msg",message);
+
+	@RequestMapping(value = "doE")
+	public String doE(@RequestParam(name = "msg", required = false, defaultValue = "empty message") String message,
+			Model model) {
+		model.addAttribute("msg", message);
 		return "result";
 	}
-	@RequestMapping(value="doF", method=RequestMethod.POST)
+
+	@RequestMapping(value = "doF", method = RequestMethod.POST)
 	public String doD(String msg, int age, Model model) {
-		model.addAttribute("msg",msg+":"+age);
+		model.addAttribute("msg", msg + ":" + age);
 		return "result";
 	}
-	@RequestMapping(value="productWrite")
-	public String productWrite(
-			String name, 
-			int price, 
-			Model model,
-			ProductVO vo) {
+
+	@RequestMapping(value = "productWrite")
+	public String productWrite(String name, int price, Model model, ProductVO vo) {
 		ProductVO product = new ProductVO(name, price);
 		System.out.println(product);
 		model.addAttribute("product", product);
@@ -72,49 +67,22 @@ public class SampleController {
 		model.addAttribute(vo);
 		return "product";
 	}
+
 	// @RequestMapping(value="productWriteSubmit", method=RequestMethod.POST)
 	// 위와 같음
 	@PostMapping("productWriteSubmit")
-	public ModelAndView productWrite(ModelAndView mav, 
-			ProductVO prod) {
+	public ModelAndView productWrite(ModelAndView mav, ProductVO prod) {
 		// mav.addObject("productVO",prod); 키값 넘기지 않았을 경우 처리되는 결과
-		mav.addObject(prod); 	// 모델에 실림
-		mav.addObject("product",prod);
+		mav.addObject(prod); // 모델에 실림
+		mav.addObject("product", prod);
 		mav.setViewName("product");
 		return mav;
 	}
-	
-	@GetMapping("redirect")		//a태그를 통하므로 get방식임
+
+	@GetMapping("redirect") // a태그를 통하므로 get방식임
 	public String redirect() {
-		
+
 		return "redirect:main.home";
 	}
-	
+
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
